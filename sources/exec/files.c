@@ -6,7 +6,7 @@
 /*   By: avedrenn <avedrenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:33:28 by avedrenn          #+#    #+#             */
-/*   Updated: 2023/08/03 15:43:25 by avedrenn         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:58:20 by avedrenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	get_infile(t_command *c, t_redir *r)
 		if (c->fd_in < 0)
 		{
 			ft_dprintf(2, "infile : %s : %s\n", r->file, strerror(errno));
-			return (errno);
+			return (1);
 		}
 	}
 	else
@@ -40,7 +40,7 @@ int	get_outfile(t_command *c, t_redir *r, const int mode)
 		if (c->fd_out < 0)
 		{
 			ft_dprintf(2, "outfile : %s : %s\n", r->file, strerror(errno));
-			return (errno);
+			return (1);
 		}
 	}
 	else

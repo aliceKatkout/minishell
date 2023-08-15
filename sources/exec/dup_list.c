@@ -6,7 +6,7 @@
 /*   By: avedrenn <avedrenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:01:44 by nsainton          #+#    #+#             */
-/*   Updated: 2023/08/02 18:36:49 by avedrenn         ###   ########.fr       */
+/*   Updated: 2023/08/15 16:05:31 by avedrenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@ int	make_dups_list(t_command *cmd, t_redir *redir)
 				exit_free_gc(ALLOCATION_ERROR);
 			}
 			ft_lstadd_back(&cmd->fds, gc_lstnew(dup_fds));
+		}
+		else 
+		{	
+			close_list(cmd->fds);
+			return (1);
 		}
 	}
 	return (0);

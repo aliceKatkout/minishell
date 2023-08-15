@@ -6,7 +6,7 @@
 /*   By: avedrenn <avedrenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 16:00:45 by nsainton          #+#    #+#             */
-/*   Updated: 2023/08/03 12:43:12 by avedrenn         ###   ########.fr       */
+/*   Updated: 2023/08/15 16:15:41 by avedrenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,16 @@ int	exec_pipeline(t_data *d)
 	if (set_data(d))
 		return (1);
 	if (d->cmds_nb == 1)
-		exec_one(d);
+		keep_exit_status(exec_one(d));
 	while (++d->index < d->cmds_nb)
 	{
 		if (make_redirs(d, d->cmds[d->index]))
 		{
+			d->pid[d->index] = -111;
 			if (d->index != d->cmds_nb - 1)
 			{
-				close_used_pipes(d, d->cmds[d->index]);
+				close(d->p[0]);
+				ft_putchar_fd('\0', d->p[1]);
 				d->index ++;
 			}
 			else
